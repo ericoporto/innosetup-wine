@@ -1,0 +1,20 @@
+name: Build and publish
+
+on: 
+  push:
+    branches:
+    - "main"
+
+jobs:
+  build-and-publish-head:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3 # Checking out the repo
+
+    - name: Build and publish "head" Docker image
+      uses: ericoporto/gp-docker-action@1.7.0
+      with:
+        github-token: ${{ secrets.MY_SECRET }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+        image-name: innosetup-wine # Docker image name
+        image-tag: latest # Docker image tag
